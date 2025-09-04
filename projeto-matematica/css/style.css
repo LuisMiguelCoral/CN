@@ -1,0 +1,190 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.table-responsive {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#coeficientes-container input, 
+#matriz-container input {
+    margin-bottom: 5px;
+}
+
+#resultados {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+.equacoes {
+    font-family: 'Courier New', monospace;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.etapa {
+    border-left: 4px solid #007bff;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.table-sm input {
+    font-size: 0.875rem;
+    padding: 0.2rem 0.4rem;
+}
+
+.text-primary {
+    color: #007bff !important;
+    font-weight: bold;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+.equacoes {
+    font-family: 'Courier New', monospace;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.etapa {
+    border-left: 4px solid #007bff;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    background-color: #f0f8ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input-group {
+    margin-bottom: 5px;
+}
+
+.input-group-text {
+    min-width: 40px;
+    justify-content: center;
+}
+
+.coeficiente, .resultado {
+    text-align: center;
+}
+
+.matriz-tabela {
+    font-family: 'Courier New', monospace;
+    margin: 10px 0;
+    width: auto;
+}
+
+.matriz-tabela td {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.resultado-cell {
+    border-left: 2px solid #000 !important;
+    font-weight: bold;
+}
+
+.text-primary {
+    color: #007bff !important;
+    font-weight: bold;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+.solucao {
+    font-weight: bold;
+    color: #28a745;
+    font-size: 1.1em;
+}
+
+/* Novos estilos adicionados */
+.determinante {
+    font-weight: bold;
+    color: #dc3545;
+    font-size: 1.2em;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff3cd;
+    border-radius: 5px;
+    border-left: 4px solid #ffc107;
+}
+
+.etapa-matrix {
+    margin: 8px 0;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .input-group-text {
+        min-width: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .coeficiente, .resultado {
+        padding: 0.25rem;
+    }
+    
+    .matriz-tabela {
+        font-size: 0.8rem;
+    }
+    
+    .matriz-tabela td {
+        padding: 3px 5px;
+    }
+}
+
+.aviso {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.operacao-matematica {
+    font-family: 'Courier New', monospace;
+    background-color: #f8f9fa;
+    padding: 2px 5px;
+    border-radius: 3px;
+    border: 1px solid #e9ecef;
+}
+
+.card-header {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.navbar-dark.bg-primary {
+    background-color: #0d6efd !important;
+}

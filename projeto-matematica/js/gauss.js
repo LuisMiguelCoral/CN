@@ -6,13 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const etapasDiv = document.getElementById('etapas');
     const resultadosDiv = document.getElementById('resultados');
     
-    // Atualizar equações quando n mudar
     nInput.addEventListener('change', atualizarEquacoes);
-    
-    // Inicializar equações
+
     atualizarEquacoes();
-    
-    // Configurar evento de cálculo
+
     calcularBtn.addEventListener('click', calcularGauss);
     
     function atualizarEquacoes() {
@@ -30,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const inputGroup = document.createElement('div');
             inputGroup.className = 'input-group';
             
-            // Criar inputs para cada coeficiente
             for (let j = 0; j < n; j++) {
                 const coefInput = document.createElement('input');
                 coefInput.type = 'text';
@@ -48,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 inputGroup.appendChild(span);
             }
             
-            // Input para o resultado
             const resultadoInput = document.createElement('input');
             resultadoInput.type = 'text';
             resultadoInput.className = 'form-control resultado';
@@ -70,20 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function parseCoeficiente(valor) {
-        // Converter string para número, tratando casos especiais
         if (valor === '' || valor === '+') return 1;
         if (valor === '-') return -1;
-        
-        // Remover espaços e verificar se é fração
         valor = valor.replace(/\s/g, '');
         
-        // Verificar se é fração (formato a/b)
         const fracMatch = valor.match(/^(-?\d+)\/(-?\d+)$/);
         if (fracMatch) {
             return parseInt(fracMatch[1]) / parseInt(fracMatch[2]);
         }
-        
-        // Verificar se é decimal
+
         return parseFloat(valor) || 0;
     }
     
@@ -94,13 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < n; i++) {
             matriz[i] = [];
             
-            // Obter coeficientes
             for (let j = 0; j < n; j++) {
                 const input = document.querySelector(`.coeficiente[data-linha="${i}"][data-variavel="${j}"]`);
                 matriz[i][j] = parseCoeficiente(input.value);
             }
             
-            // Obter resultado
             const resultadoInput = document.querySelector(`.resultado[data-linha="${i}"]`);
             matriz[i][n] = parseCoeficiente(resultadoInput.value);
         }
@@ -122,15 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const absValor = Math.abs(valor);
                 if (absValor !== 1) {
-                    // Verificar se é inteiro ou decimal
                     equacao += Number.isInteger(absValor) ? absValor : absValor.toFixed(3);
                 }
                 
                 equacao += `x${j+1}`;
             }
         }
-        
-        // Se todos os coeficientes são zero
+
         if (equacao === '') {
             equacao = '0';
         }
@@ -159,13 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function calcularGauss() {
         const n = parseInt(nInput.value);
         const matriz = obterMatriz();
-        
-        // Limpar resultados anteriores
+
         matrizOriginalDiv.innerHTML = '';
         etapasDiv.innerHTML = '';
         resultadosDiv.innerHTML = '';
-        
-        // Exibir matriz original
+
         let matrizHTML = '<strong>Sistema Original:</strong><br>';
         matrizHTML += '<div class="equacoes">';
         for (let i = 0; i < n; i++) {
@@ -177,24 +161,19 @@ document.addEventListener('DOMContentLoaded', function() {
         matrizHTML += formatarMatrizParaExibicao(matriz, n);
         
         matrizOriginalDiv.innerHTML = matrizHTML;
-        
-        // Aplicar eliminação de Gauss
+
         let resultado = eliminacaoGauss(matriz, n);
-        
-        // Exibir resultados
+
         resultadosDiv.innerHTML = resultado;
     }
     
     function eliminacaoGauss(matriz, n) {
         let output = '<strong>Sistema Triangularizado:</strong><br>';
         let etapasOutput = '<strong>Etapas do Processo:</strong><br>';
-        
-        // Fase de eliminação
+
         for (let k = 0; k < n; k++) {
-            // Exibir etapa atual
             etapasOutput += `<div class="etapa mt-3"><strong>Etapa ${k+1} (Eliminar x${k+1} das equações abaixo):</strong><br>`;
-            
-            // Pivoteamento parcial
+ 
             let iMax = k;
             for (let i = k + 1; i < n; i++) {
                 if (Math.abs(matriz[i][k]) > Math.abs(matriz[iMax][k])) {
@@ -202,20 +181,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             
-            // Trocar linhas se necessário
             if (iMax !== k) {
                 etapasOutput += `<div class="text-primary">Trocando linha ${k+1} com linha ${iMax+1}</div>`;
                 
                 let temp = matriz[k];
                 matriz[k] = matriz[iMax];
                 matriz[iMax] = temp;
-                
-                // Exibir matriz após troca
+
                 etapasOutput += '<div class="mt-2">Após troca:</div>';
                 etapasOutput += formatarMatrizParaExibicao(matriz, n);
             }
-            
-            // Eliminação
+
             for (let i = k + 1; i < n; i++) {
                 if (matriz[k][k] === 0) {
                     etapasOutput += `<div class="text-danger">Divisão por zero detectada. O sistema pode não ter solução única.</div>`;
@@ -230,16 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 for (let j = k; j < n + 1; j++) {
                     matriz[i][j] -= fator * matriz[k][j];
                 }
-                
-                // Exibir matriz após esta operação
+
                 etapasOutput += '<div class="mt-2">Resultado:</div>';
                 etapasOutput += formatarMatrizParaExibicao(matriz, n);
             }
             
             etapasOutput += '</div>';
         }
-        
-        // Exibir sistema triangularizado
+
         output += '<div class="equacoes">';
         for (let i = 0; i < n; i++) {
             output += `<div>Eq${i+1}: ${formatarEquacao(matriz[i], n)}</div>`;
@@ -248,8 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         output += '<strong>Matriz Triangularizada:</strong><br>';
         output += formatarMatrizParaExibicao(matriz, n);
-        
-        // Resolução por substituição regressiva
+
         output += '<div class="mt-3"><strong>Solução por Substituição Regressiva:</strong><br>';
         
         const solucao = new Array(n);
@@ -268,10 +241,10 @@ document.addEventListener('DOMContentLoaded', function() {
             output += `<div class="solucao">x${i+1} = ${solucao[i].toFixed(6)}</div>`;
         }
         output += '</div>';
-        
-        // Exibir as etapas
+
         etapasDiv.innerHTML = etapasOutput;
         
         return output;
     }
+
 });

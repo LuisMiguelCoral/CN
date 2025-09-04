@@ -4,14 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const calcularBtn = document.getElementById('calcular-btn');
     const polinomioDiv = document.getElementById('polinomio');
     const resultadosDiv = document.getElementById('resultados');
-    
-    // Atualizar campos de coeficientes quando o grau mudar
+
     grauInput.addEventListener('change', atualizarCoeficientes);
-    
-    // Inicializar campos de coeficientes
+
     atualizarCoeficientes();
-    
-    // Configurar evento de cálculo
+
     calcularBtn.addEventListener('click', calcularBisseccao);
     
     function atualizarCoeficientes() {
@@ -66,28 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function calcularBisseccao() {
-        // Obter valores dos inputs
         const grau = parseInt(grauInput.value);
         const erro = parseFloat(document.getElementById('erro').value);
         const inicio = parseFloat(document.getElementById('inicio').value);
         const fim = parseFloat(document.getElementById('fim').value);
-        
-        // Validar intervalo
+
         if (inicio >= fim) {
             alert('Erro: O limite inferior deve ser menor que o superior!');
             return;
         }
-        
-        // Obter coeficientes
+
         const coeficientes = [];
         for (let i = 0; i <= grau; i++) {
             coeficientes[i] = parseFloat(document.getElementById(`coef-${i}`).value) || 0;
         }
-        
-        // Exibir polinômio
+
         polinomioDiv.innerHTML = `<strong>Polinômio:</strong> P(x) = ${formatarPolinomio(coeficientes)}`;
-        
-        // Implementar o método da bissecção
+
         const funcao = x => {
             let resultado = 0;
             for (let i = 0; i <= grau; i++) {
@@ -95,8 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return resultado;
         };
-        
-        // Encontrar raízes
+
         const DIVISOES = 50;
         const passo = (fim - inicio) / DIVISOES;
         let raizEncontrada = false;
@@ -178,4 +169,5 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return x;
     }
+
 });
